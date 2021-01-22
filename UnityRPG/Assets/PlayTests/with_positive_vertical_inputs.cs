@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using NUnit.Framework;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.TestTools;
 
@@ -21,15 +22,30 @@ namespace a_player
 
             //ACT
             Player player = playerObject.AddComponent<Player>();
-            player.playerInput.Vertical = 1f;
+            var testPlayerInput= new TestPlayerInput();
+            player.playerInput = testPlayerInput;
+            
+            testPlayerInput.Vertical = 1f;
+            testPlayerInput.Horizontal = 1f;
+            
             float startingZPosition = player.transform.position.z;
+            float startingXPosition = player.transform.position.x;
 
             yield return new WaitForSeconds(5f);
 
             float endingZPosition = player.transform.position.z;
+            float endingXPosition = player.transform.position.x;
             
             //ASSERT
             Assert.Greater(endingZPosition, startingZPosition);
+            Assert.Greater(endingXPosition, startingXPosition);
         }
+    }
+
+    public class TestPlayerInput : IPlayerInput
+    {
+        public float Vertical { get; set; }
+        public float Horizontal { get; set; }
+        
     }
 }
