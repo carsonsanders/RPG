@@ -12,6 +12,15 @@ namespace Tests
         [Test]
         public void NewTestScriptSimplePasses()
         {
+            //Arrange
+            List<string> myStrings = new List<string>();
+            
+            //Act
+            myStrings.Add("Carson's String");
+            myStrings.Add("Hello there");
+            
+            //Assert
+            Assert.AreEqual(2, myStrings.Count);
             // Use the Assert class to test conditions
         }
 
