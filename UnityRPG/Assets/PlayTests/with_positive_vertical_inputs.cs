@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using NSubstitute;
 using NUnit.Framework;
 using UnityEditor.VersionControl;
 using UnityEngine;
@@ -22,11 +23,12 @@ namespace a_player
 
             //ACT
             Player player = playerObject.AddComponent<Player>();
-            var testPlayerInput= new TestPlayerInput();
+
+            var testPlayerInput = Substitute.For<IPlayerInput>();
             player.playerInput = testPlayerInput;
             
-            testPlayerInput.Vertical = 1f;
-            testPlayerInput.Horizontal = 1f;
+            testPlayerInput.Vertical.Returns(1f);
+            testPlayerInput.Horizontal.Returns(1f);
             
             float startingZPosition = player.transform.position.z;
             float startingXPosition = player.transform.position.x;
@@ -40,12 +42,5 @@ namespace a_player
             Assert.Greater(endingZPosition, startingZPosition);
             Assert.Greater(endingXPosition, startingXPosition);
         }
-    }
-
-    public class TestPlayerInput : IPlayerInput
-    {
-        public float Vertical { get; set; }
-        public float Horizontal { get; set; }
-        
     }
 }
