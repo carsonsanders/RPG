@@ -126,4 +126,25 @@ namespace a_player
             Assert.Greater(turnAmount, 0);
         }
     }
+
+    public class itemPickup
+    {
+        [UnityTest]
+        public IEnumerator item_pickup()
+        {
+            //Arrange
+            yield return helpers.LoadMovementTestsScene();
+            var player = helpers.GetPlayer();
+
+            //ACT (move forward to pick it up)
+            player.playerInput.Vertical.Returns(1f);
+            Item item = Object.FindObjectOfType<Item>();
+
+            yield return new WaitForSeconds(1f);
+            //ASSERT
+            Assert.AreSame(item, player.GetComponent<Inventory>().ActiveItem);
+            
+            
+        }
+    }
 }
