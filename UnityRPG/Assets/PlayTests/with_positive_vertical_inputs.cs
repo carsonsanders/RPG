@@ -4,27 +4,23 @@ using NUnit.Framework;
 using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 
 namespace a_player
 {
     public static class helpers
     {
-        public static void CreateFloor()
+        public static IEnumerator LoadMovementTestsScene()
         {
-            var floor = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            floor.transform.localScale = new Vector3(50, 0.1f, 50);
-            floor.transform.position = new Vector3(0, -3, 0);
+            var operation = SceneManager.LoadSceneAsync("MovementTests");
+            while (operation.isDone == false)
+                yield return null;
         }
 
-        public static Player CreatePlayer()
+        public static Player GetPlayer()
         {
-            var playerObject = GameObject.CreatePrimitive(PrimitiveType.Capsule);
-            playerObject.AddComponent<CharacterController>();
-            playerObject.AddComponent<NavMeshAgent>();
-            playerObject.transform.position = new Vector3(0, 10, 0);
-            
-            Player player = playerObject.AddComponent<Player>();
+            Player player = GameObject.FindObjectOfType<Player>();
 
             var testPlayerInput = Substitute.For<IPlayerInput>();
             player.playerInput = testPlayerInput;
@@ -45,8 +41,8 @@ namespace a_player
         public IEnumerator moves_forward()
         {
             //ARRANGE
-            helpers.CreateFloor();
-            var player = helpers.CreatePlayer();
+            yield return helpers.LoadMovementTestsScene();
+            var player = helpers.GetPlayer();
 
             //ACT
             player.playerInput.Vertical.Returns(1f);
@@ -65,6 +61,33 @@ namespace a_player
             Assert.Greater(endingXPosition, startingXPosition);
         }
     }
+    
+    public class with_negative_vertical_inputs
+    {
+        [UnityTest]
+        public IEnumerator moves_backward()
+        {
+            //ARRANGE
+            yield return helpers.LoadMovementTestsScene();
+            var player = helpers.GetPlayer();
+
+            //ACT
+            player.playerInput.Vertical.Returns(-1f);
+            player.playerInput.Horizontal.Returns(-1f);
+            
+            float startingZPosition = player.transform.position.z;
+            float startingXPosition = player.transform.position.x;
+
+            yield return new WaitForSeconds(5f);
+
+            float endingZPosition = player.transform.position.z;
+            float endingXPosition = player.transform.position.x;
+            
+            //ASSERT
+            Assert.Less(endingZPosition, startingZPosition);
+            Assert.Less(endingXPosition, startingXPosition);
+        }
+    }
 
     public class with_negative_mouse_x
     {
@@ -72,16 +95,35 @@ namespace a_player
         public IEnumerator turns_left()
         {
             //ARRANGE
-            helpers.CreateFloor();
-            var player = helpers.CreatePlayer();
+            yield return helpers.LoadMovementTestsScene();
+            var player = helpers.GetPlayer();
 
             player.playerInput.MouseX.Returns(-1f);
 
             var originalRotation = player.transform.rotation;
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.3f);
 
             float turnAmount = helpers.CalculateTurn(originalRotation, player.transform.rotation);
             Assert.Less(turnAmount, 0);
+        }
+    }
+    
+    public class with_positive_mouse_x
+    {
+        [UnityTest]
+        public IEnumerator turns_right()
+        {
+            //ARRANGE
+            yield return helpers.LoadMovementTestsScene();
+            var player = helpers.GetPlayer();
+
+            player.playerInput.MouseX.Returns(1f);
+
+            var originalRotation = player.transform.rotation;
+            yield return new WaitForSeconds(0.3f);
+
+            float turnAmount = helpers.CalculateTurn(originalRotation, player.transform.rotation);
+            Assert.Greater(turnAmount, 0);
         }
     }
 }
