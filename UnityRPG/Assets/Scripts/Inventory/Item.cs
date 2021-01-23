@@ -6,8 +6,11 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class Item : MonoBehaviour
 {
-    private bool _wasPickedUp;
+    [SerializeField] private UseAction[] _actions;
+    public UseAction[] Actions => _actions;
 
+    private bool _wasPickedUp;
+    
     private void OnTriggerEnter(Collider other)
     {
         if (_wasPickedUp)
