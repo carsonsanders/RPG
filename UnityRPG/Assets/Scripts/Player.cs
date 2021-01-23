@@ -6,31 +6,24 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private CharacterController characterController;
+    private IMover _mover;
     public IPlayerInput playerInput { get; set; }= new PlayerInput();
     
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
+        _mover = new NavmeshMover(this); //Mover(this);
         //playerInput = new PlayerInput();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 movementInput = new Vector3(playerInput.Horizontal, 0, playerInput.Vertical);
-        Vector3 movement = transform.rotation * movementInput;
-        characterController.SimpleMove(movement);
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            _mover = new Mover(this);
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+            _mover = new NavmeshMover(this);
+        
+        _mover.Tick();
     }
-}
-
-public class PlayerInput : IPlayerInput
-{
-    public float Vertical => Input.GetAxis("Vertical");
-    public float Horizontal => Input.GetAxis("Horizontal");
-}
-
-public interface IPlayerInput
-{
-    float Vertical { get; }
-    float Horizontal { get; }
 }
