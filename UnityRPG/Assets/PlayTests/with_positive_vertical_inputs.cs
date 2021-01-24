@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
+using UnityEngine.UI;
 
 namespace a_player
 {
@@ -14,6 +15,17 @@ namespace a_player
         public static IEnumerator LoadMovementTestsScene()
         {
             var operation = SceneManager.LoadSceneAsync("MovementTests");
+            while (operation.isDone == false)
+                yield return null;
+        }
+        
+        public static IEnumerator LoadItemTestsScene()
+        {
+            var operation = SceneManager.LoadSceneAsync("ItemTests");
+            while (operation.isDone == false)
+                yield return null;
+            
+            operation = SceneManager.LoadSceneAsync("UI", LoadSceneMode.Additive);
             while (operation.isDone == false)
                 yield return null;
         }
@@ -143,8 +155,28 @@ namespace a_player
             yield return new WaitForSeconds(1f);
             //ASSERT
             Assert.AreSame(item, player.GetComponent<Inventory>().ActiveItem);
+        }
+    }
+    
+    public class changes_crosshair_to_item_crosshair
+    {
+        [UnityTest]
+        public IEnumerator crosshair_change()
+        {
+            //Arrange
+            yield return helpers.LoadItemTestsScene();
+            var player = helpers.GetPlayer();
+            var crosshair = Object.FindObjectOfType<Crosshair>();
+
+            //ACT (move forward to pick it up)
+            player.playerInput.Vertical.Returns(1f);
+            Item item = Object.FindObjectOfType<Item>();
             
-            
+            Assert.AreNotSame(item.CrosshairDefinition.Sprite, crosshair.GetComponent<Image>().sprite);
+
+            yield return new WaitForSeconds(1f);
+            //ASSERT
+            Assert.AreEqual(item.CrosshairDefinition.Sprite, crosshair.GetComponent<Image>().sprite);
         }
     }
 }

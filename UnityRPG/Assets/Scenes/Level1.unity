@@ -282,6 +282,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5848637413921963971, guid: 29c4dcf284ae6cd43bf96352eaba18d2,
         type: 3}
+      propertyPath: _crosshairDefinition
+      value: 
+      objectReference: {fileID: 11400000, guid: fe03848072935f745ac10b9e68f3bc2b,
+        type: 2}
+    - target: {fileID: 5848637413921963971, guid: 29c4dcf284ae6cd43bf96352eaba18d2,
+        type: 3}
       propertyPath: _actions.Array.data[0].UseMode
       value: 1
       objectReference: {fileID: 0}
@@ -324,7 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77e935cebd8c15a42a4fa0160acd4036, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _crosshairMode: 0
+  _crosshairDefinition: {fileID: 0}
   _actions: []
 --- !u!65 &954913568
 BoxCollider:
