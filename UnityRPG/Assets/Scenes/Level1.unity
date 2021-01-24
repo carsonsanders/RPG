@@ -189,6 +189,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 432531a31e5c29341bfc2028eef8b4e8,
         type: 3}
+    - target: {fileID: 5848637413921963971, guid: 29c4dcf284ae6cd43bf96352eaba18d2,
+        type: 3}
+      propertyPath: _crosshairDefinition
+      value: 
+      objectReference: {fileID: 11400000, guid: 43e46be8147b0f748a2c19306f3cc669,
+        type: 2}
     - target: {fileID: 7654356871093354353, guid: 29c4dcf284ae6cd43bf96352eaba18d2,
         type: 3}
       propertyPath: m_Name
@@ -264,6 +270,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 4dbda97e9ae0aff45881480b2c7c9576,
         type: 3}
+    - target: {fileID: 5848637413921963971, guid: 29c4dcf284ae6cd43bf96352eaba18d2,
+        type: 3}
+      propertyPath: _crosshairDefinition
+      value: 
+      objectReference: {fileID: 11400000, guid: 6bebab35cc7a19e48a8595d3ced80264,
+        type: 2}
     - target: {fileID: 7654356871093354353, guid: 29c4dcf284ae6cd43bf96352eaba18d2,
         type: 3}
       propertyPath: m_Name

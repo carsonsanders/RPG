@@ -178,5 +178,25 @@ namespace a_player
             //ASSERT
             Assert.AreEqual(item.CrosshairDefinition.Sprite, crosshair.GetComponent<Image>().sprite);
         }
+       
+        [UnityTest]
+        public IEnumerator change_slot1_icon_to_match_item_icon()
+        {
+            //Arrange
+            yield return helpers.LoadItemTestsScene();
+            var player = helpers.GetPlayer();
+            var hotbar = Object.FindObjectOfType<Hotbar>();
+            var slotOne = hotbar.GetComponentInChildren<Slot>();
+
+            //ACT (move forward to pick it up)
+            player.playerInput.Vertical.Returns(1f);
+            Item item = Object.FindObjectOfType<Item>();
+            
+            Assert.AreNotSame(item.Icon, slotOne.IconImage.sprite);
+
+            yield return new WaitForSeconds(1f);
+            //ASSERT
+            Assert.AreEqual(item.Icon, slotOne.IconImage.sprite);
+        }
     }
 }

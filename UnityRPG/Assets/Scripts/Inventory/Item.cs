@@ -28,6 +28,7 @@ public class Item : MonoBehaviour
     private void OnValidate()
     {
         var collider = GetComponent<Collider>();
-        collider.isTrigger = true;
+        if(collider.isTrigger == false)
+            collider.isTrigger = true;
     }
 }

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7525ea4e1fcc4f1284f6391c56b135f7, type: 3}
   m_Name: Shotgun3
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: a33c1c7c4a948df47b0863fb8d7f53b5, type: 3}

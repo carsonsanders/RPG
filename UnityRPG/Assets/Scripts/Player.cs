@@ -15,7 +15,17 @@ public class Player : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         _mover = new Mover(this);//new NavmeshMover(this); //Mover(this);
         _rotator = new Rotator(this);
-        //playerInput = new PlayerInput();
+
+        playerInput.MoveModeTogglePressed += MoveModeTogglePressed;
+    }
+
+    private void MoveModeTogglePressed()
+    {
+        if (_mover is NavmeshMover)
+            _mover = new Mover(this);
+        else
+            _mover = new NavmeshMover(this);
+        
     }
 
     // Update is called once per frame

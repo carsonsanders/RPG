@@ -254,6 +254,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5848637413921963971, guid: 29c4dcf284ae6cd43bf96352eaba18d2,
         type: 3}
+      propertyPath: _icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 432531a31e5c29341bfc2028eef8b4e8,
+        type: 3}
+    - target: {fileID: 5848637413921963971, guid: 29c4dcf284ae6cd43bf96352eaba18d2,
+        type: 3}
       propertyPath: _crosshairDefinition
       value: 
       objectReference: {fileID: 11400000, guid: fe03848072935f745ac10b9e68f3bc2b,
