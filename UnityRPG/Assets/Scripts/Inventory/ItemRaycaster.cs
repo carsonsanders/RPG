@@ -39,6 +39,9 @@ public class ItemRaycaster : ItemComponent
             Transform hitCube = GameObject.CreatePrimitive(PrimitiveType.Cube).transform;
             hitCube.localScale = Vector3.one * 0.1f;
             hitCube.position = nearest.point;
+            
+            if(nearest.collider.GetType() == typeof(CapsuleCollider))
+                Debug.Log("Collided with player");
         }
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class Item : MonoBehaviour
 {
-    [SerializeField] private UseAction[] _actions;
+    [SerializeField] private UseAction[] _actions = new UseAction[0];
     public UseAction[] Actions => _actions;
 
     private bool _wasPickedUp;
