@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections;
-using JetBrains.Annotations;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
 public class Item : MonoBehaviour
 {
+    [SerializeField] private CrosshairMode _crosshairMode;
     [SerializeField] private UseAction[] _actions = new UseAction[0];
     public UseAction[] Actions => _actions;
+    public CrosshairMode CrosshairMode => _crosshairMode;
 
     private bool _wasPickedUp;
     

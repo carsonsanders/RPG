@@ -231,8 +231,9 @@ GameObject:
   - component: {fileID: 395555384}
   - component: {fileID: 395555386}
   - component: {fileID: 395555385}
+  - component: {fileID: 395555387}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Crosshair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -294,6 +295,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 395555383}
   m_CullTransparentMesh: 0
+--- !u!114 &395555387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 395555383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5634e832b0f39a3469811fc5eceee128, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _crosshairImage: {fileID: 395555385}
+  _gunSprite: {fileID: 21300000, guid: 5ff8f2491b720a244802c5201715c015, type: 3}
+  _invalidSprite: {fileID: 21300000, guid: 5e14c870de7910c4cb02dd3b05c062ec, type: 3}
 --- !u!1 &573545126
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,7 +320,6 @@ GameObject:
   m_Component:
   - component: {fileID: 573545129}
   - component: {fileID: 573545128}
-  - component: {fileID: 573545127}
   m_Layer: 0
   m_Name: UICamera
   m_TagString: Untagged
@@ -312,14 +327,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &573545127
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 573545126}
-  m_Enabled: 1
 --- !u!20 &573545128
 Camera:
   m_ObjectHideFlags: 0
