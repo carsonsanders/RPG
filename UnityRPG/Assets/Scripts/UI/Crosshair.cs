@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class Crosshair : MonoBehaviour
 {
     [SerializeField] private Image _crosshairImage;
-    [SerializeField] private Sprite _gunSprite;
     [SerializeField] private Sprite _invalidSprite;
    
     private Inventory _inventory;
@@ -30,20 +26,15 @@ public class Crosshair : MonoBehaviour
 
     private void HandleActiveItemChanged(Item item)
     {
-        switch (item.CrosshairMode)
+        if(item != null && item.CrosshairDefinition != null)
         {
-            case CrosshairMode.Gun: _crosshairImage.sprite = _gunSprite;
-                break;
-            case CrosshairMode.Invalid: _crosshairImage.sprite = _invalidSprite;
-                break;
-            
+            _crosshairImage.sprite = item.CrosshairDefinition.Sprite;
+            Debug.Log($"Crosshair detected {item.CrosshairDefinition}");
         }
-        Debug.Log($"Crosshair detected {item.CrosshairMode}");
+        else
+        {
+            _crosshairImage.sprite = _invalidSprite;
+        }
+       
     }
-}
-
-public enum CrosshairMode
-{
-    Invalid,
-    Gun,
 }

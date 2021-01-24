@@ -3,10 +3,10 @@
 [RequireComponent(typeof(Collider))]
 public class Item : MonoBehaviour
 {
-    [SerializeField] private CrosshairMode _crosshairMode;
+    [SerializeField] private CrosshairDefinition _crosshairDefinition;
     [SerializeField] private UseAction[] _actions = new UseAction[0];
     public UseAction[] Actions => _actions;
-    public CrosshairMode CrosshairMode => _crosshairMode;
+    public CrosshairDefinition CrosshairDefinition => _crosshairDefinition;
 
     private bool _wasPickedUp;
     
