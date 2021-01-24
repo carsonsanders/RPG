@@ -21,12 +21,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-            _mover = new Mover(this);
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-            _mover = new NavmeshMover(this);
-        
         _mover.Tick();
         _rotator.Tick();
+        playerInput.Tick();
     }
 }
