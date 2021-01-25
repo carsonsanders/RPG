@@ -72,7 +72,7 @@ namespace a_player
             float startingZPosition = player.transform.position.z;
             float startingXPosition = player.transform.position.x;
 
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(2f);
 
             float endingZPosition = player.transform.position.z;
             float endingXPosition = player.transform.position.x;
@@ -99,7 +99,7 @@ namespace a_player
             float startingZPosition = player.transform.position.z;
             float startingXPosition = player.transform.position.x;
 
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(2f);
 
             float endingZPosition = player.transform.position.z;
             float endingXPosition = player.transform.position.x;
