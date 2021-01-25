@@ -120,7 +120,7 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 1f0d789a877fcce4bbfc47ad255c86a8, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 2ceb7264b9cc150408db7cccb0e735ae, type: 2}
 --- !u!1 &231791288 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9205eff0942d6364da2f764ee2a848f9,
@@ -769,6 +769,9 @@ GameObject:
   - component: {fileID: 993715474}
   - component: {fileID: 993715473}
   - component: {fileID: 993715475}
+  - component: {fileID: 993715476}
+  - component: {fileID: 993715477}
+  - component: {fileID: 993715478}
   m_Layer: 0
   m_Name: NPC
   m_TagString: Untagged
@@ -818,6 +821,52 @@ CapsuleCollider:
   m_Height: 1.8
   m_Direction: 1
   m_Center: {x: 0, y: 0.9, z: 0}
+--- !u!114 &993715476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993715472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db6ba9ef2012c244487b70c3aff92fe4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &993715477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993715472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 876a8613f0d84552b1fe9729f7d906d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!195 &993715478
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993715472}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &1291618171 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8832783311672982851, guid: a1e9f68278cd05e4585247daba3efdc1,
