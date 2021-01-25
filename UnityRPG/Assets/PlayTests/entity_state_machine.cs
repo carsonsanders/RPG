@@ -34,5 +34,30 @@ namespace state_machine
 
 
         }
+        
+        [UnityTest]
+        public IEnumerator switches_to_dead_once_health_reaches_zero()
+        {
+            yield return helpers.LoadEntityStateMachineTestsScene();
+            
+            
+            var stateMachine = GameObject.FindObjectOfType<EntityStateMachine>();
+            var entity = stateMachine.GetComponent<Entity>();
+            
+            yield return null;
+            Assert.AreEqual(typeof(Idle), stateMachine.CurrentStateType);
+
+            entity.TakeHit(entity.Health - 1);
+            
+            yield return null;
+            Assert.AreEqual(typeof(Idle), stateMachine.CurrentStateType);
+            
+            entity.TakeHit(entity.Health);
+            
+            yield return null;
+            Assert.AreEqual(typeof(Dead), stateMachine.CurrentStateType);
+
+
+        }
     }
 }
