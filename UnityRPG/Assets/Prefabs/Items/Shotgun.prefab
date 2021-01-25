@@ -67,6 +67,7 @@ MonoBehaviour:
     TargetComponent: {fileID: 811658439}
   - UseMode: 0
     TargetComponent: {fileID: -7137619053103415933}
+  _icon: {fileID: 21300000, guid: b7c0e6e692ff02d4193057c2c65b260e, type: 3}
 --- !u!114 &811658439
 MonoBehaviour:
   m_ObjectHideFlags: 0

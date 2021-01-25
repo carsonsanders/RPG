@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
 public class Item : MonoBehaviour
@@ -30,5 +31,20 @@ public class Item : MonoBehaviour
         var collider = GetComponent<Collider>();
         if(collider.isTrigger == false)
             collider.isTrigger = true;
+    }
+}
+
+[CustomEditor(typeof(Item))]
+public class ItemEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        Item item = (Item) target;
+        
+        EditorGUILayout.LabelField("Custom Item Editor ");
+        GUILayout.Box(item.Icon.texture, GUILayout.Width(60), GUILayout.Height(60));
+
+
+        base.OnInspectorGUI();
     }
 }
