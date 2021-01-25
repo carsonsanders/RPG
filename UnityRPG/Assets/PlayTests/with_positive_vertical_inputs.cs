@@ -113,7 +113,7 @@ namespace a_player
             player.playerInput.MouseX.Returns(-1f);
 
             var originalRotation = player.transform.rotation;
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.2f);
 
             float turnAmount = helpers.CalculateTurn(originalRotation, player.transform.rotation);
             Assert.Less(turnAmount, 0);
@@ -132,7 +132,7 @@ namespace a_player
             player.playerInput.MouseX.Returns(1f);
 
             var originalRotation = player.transform.rotation;
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.2f);
 
             float turnAmount = helpers.CalculateTurn(originalRotation, player.transform.rotation);
             Assert.Greater(turnAmount, 0);
