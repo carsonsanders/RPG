@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
 public class EntityStateMachine : MonoBehaviour
@@ -8,6 +7,9 @@ public class EntityStateMachine : MonoBehaviour
     private NavMeshAgent _navMeshAgent;
     private void Awake()
     {
+        var player = FindObjectOfType<Player>();
+        _navMeshAgent = GetComponent<NavMeshAgent>();
+        
         _stateMachine = new StateMachine();
 
         var idle = new Idle();
@@ -17,6 +19,12 @@ public class EntityStateMachine : MonoBehaviour
         _stateMachine.Add(idle);
         _stateMachine.Add(chasePlayer);
         _stateMachine.Add(attack);
+
+        _stateMachine.AddTransition(idle, chasePlayer,
+            () => Vector3.Distance(_navMeshAgent.transform.position, player.transform.position) < 5f);
+        
+        _stateMachine.AddTransition(chasePlayer, attack,
+            () => Vector3.Distance(_navMeshAgent.transform.position, player.transform.position) < 2f);
         
         _stateMachine.SetState(idle);
     }
