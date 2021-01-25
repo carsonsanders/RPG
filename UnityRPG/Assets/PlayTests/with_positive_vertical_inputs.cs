@@ -29,6 +29,13 @@ namespace a_player
             while (operation.isDone == false)
                 yield return null;
         }
+        
+        public static IEnumerator LoadEntityStateMachineTestsScene()
+        {
+            var operation = SceneManager.LoadSceneAsync("EntityStateMachineTests");
+            while (operation.isDone == false)
+                yield return null;
+        }
 
         public static Player GetPlayer()
         {
@@ -46,6 +53,8 @@ namespace a_player
             var dot = Vector3.Dot(cross, Vector3.up);
             return dot;
         }
+
+        
     }
     public class with_positive_vertical_inputs
     {
