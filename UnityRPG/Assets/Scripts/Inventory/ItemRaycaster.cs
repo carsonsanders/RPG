@@ -4,6 +4,7 @@ public class ItemRaycaster : ItemComponent
 {
     [SerializeField] private float _delay = 0.1f;
     [SerializeField] float _range = 10f;
+    [SerializeField] private int _damage = 1;
     
     private RaycastHit[] _results = new RaycastHit[100];
     private int _layerMask;
@@ -36,12 +37,8 @@ public class ItemRaycaster : ItemComponent
         }
         if(nearest.transform != null)
         {
-            Transform hitCube = GameObject.CreatePrimitive(PrimitiveType.Cube).transform;
-            hitCube.localScale = Vector3.one * 0.1f;
-            hitCube.position = nearest.point;
-            
-            if(nearest.collider.GetType() == typeof(CapsuleCollider))
-                Debug.Log("Collided with player");
+            var takeHits = nearest.collider.GetComponent<ITakeHits>();
+            takeHits?.TakeHit(_damage);
         }
     }
 }
