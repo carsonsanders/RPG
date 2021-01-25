@@ -23,11 +23,6 @@ public class EntityStateMachine : MonoBehaviour
         var attack = new Attack();
         var dead = new Dead();
 
-        _stateMachine.Add(idle);
-        _stateMachine.Add(chasePlayer);
-        _stateMachine.Add(attack);
-        _stateMachine.Add(dead);
-
         _stateMachine.AddTransition(idle, chasePlayer,
             () => DistanceFlat(_navMeshAgent.transform.position, player.transform.position) < 5f);
         
