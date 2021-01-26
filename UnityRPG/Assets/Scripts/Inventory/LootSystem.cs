@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -8,6 +10,7 @@ public class LootSystem : MonoBehaviour
     [SerializeField] private AssetReference _lootItemHolderPrefab;
     
     private static LootSystem _instance;
+    private static Queue<LootItemHolder> _lootItemHolder = new Queue<LootItemHolder>();
 
     private void Awake()
     {
@@ -20,8 +23,16 @@ public class LootSystem : MonoBehaviour
 
     public static void Drop(Item item, Transform droppingTransform)
     {
-        _instance.StartCoroutine(_instance.DropAsync(item, droppingTransform));
-        
+        if (_lootItemHolder.Any())
+        {
+            var lootItemHolder = _lootItemHolder.Dequeue();
+            lootItemHolder.gameObject.SetActive(true);
+            AssignItemToHolder(item, droppingTransform, lootItemHolder);
+        }
+        else
+        {
+            _instance.StartCoroutine(_instance.DropAsync(item, droppingTransform));
+        }
     }
 
     private IEnumerator DropAsync(Item item, Transform droppingTransform)
@@ -29,7 +40,14 @@ public class LootSystem : MonoBehaviour
         var operation = _lootItemHolderPrefab.InstantiateAsync();
         yield return operation;
         
-        var lootItemHolder = operation.Result.GetComponent<LootItemHolder>();;
+        var lootItemHolder = operation.Result.GetComponent<LootItemHolder>();
+
+        AssignItemToHolder(item, droppingTransform, lootItemHolder);
+
+    }
+
+    private static void AssignItemToHolder(Item item, Transform droppingTransform, LootItemHolder lootItemHolder)
+    {
         lootItemHolder.TakeItem(item);
 
         Vector2 randomCirclePoint = UnityEngine.Random.insideUnitCircle * 3f;
@@ -38,4 +56,9 @@ public class LootSystem : MonoBehaviour
         lootItemHolder.transform.position = randomPosition;
     }
 
+    public static void AddToPool(LootItemHolder lootItemHolder)
+    {
+        lootItemHolder.gameObject.SetActive(false);
+        _lootItemHolder.Enqueue(lootItemHolder);
+    }
 }
