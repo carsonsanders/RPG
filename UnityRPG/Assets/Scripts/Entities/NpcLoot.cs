@@ -38,8 +38,9 @@ public class NpcLoot : MonoBehaviour
     {
         foreach (var item in _inventory.Items)
         {
-            var lootItemHolder = FindObjectOfType<LootItemHolder>();
-            lootItemHolder.TakeItem(item);
+            LootSystem.Drop(item, transform);
+            //var lootItemHolder = FindObjectOfType<LootItemHolder>();
+            //lootItemHolder.TakeItem(item);
         }
 
         _inventory.Items.Clear();
