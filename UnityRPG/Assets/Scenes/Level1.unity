@@ -772,6 +772,8 @@ GameObject:
   - component: {fileID: 993715476}
   - component: {fileID: 993715477}
   - component: {fileID: 993715478}
+  - component: {fileID: 993715480}
+  - component: {fileID: 993715479}
   m_Layer: 0
   m_Name: NPC
   m_TagString: Untagged
@@ -867,6 +869,33 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &993715479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993715472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34e5d260e5974a24a834ff7e672e6b48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _itemPrefabs:
+  - {fileID: 5848637413921963971, guid: 29c4dcf284ae6cd43bf96352eaba18d2, type: 3}
+--- !u!114 &993715480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993715472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 005c18a2373f4bdca1407c666a19be0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rightHand: {fileID: 1713342200}
 --- !u!1 &1291618171 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8832783311672982851, guid: a1e9f68278cd05e4585247daba3efdc1,
@@ -978,6 +1007,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1478238964 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -1824824446595371411, guid: 9205eff0942d6364da2f764ee2a848f9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1503309945}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1503309945
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1047,6 +1082,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9205eff0942d6364da2f764ee2a848f9, type: 3}
+--- !u!1 &1713342199
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1713342200}
+  m_Layer: 0
+  m_Name: RightHandRifleMount
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1713342200
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1713342199}
+  m_LocalRotation: {x: 0.4708829, y: 0.5462502, z: 0.54895854, w: 0.42252165}
+  m_LocalPosition: {x: 0.0725, y: -0.0415, z: 0.0317}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_Children: []
+  m_Father: {fileID: 1478238964}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: -11.643001, y: 92.355, z: 92.702}
 --- !u!1001 &8832783311017152562
 PrefabInstance:
   m_ObjectHideFlags: 0

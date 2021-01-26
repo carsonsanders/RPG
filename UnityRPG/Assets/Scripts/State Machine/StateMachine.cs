@@ -10,6 +10,8 @@ public class StateMachine
     private IState _currentState;
     public IState CurrentState => _currentState;
 
+    public event Action<IState> OnStateChanged;
+
     public void AddAnyTransition(IState to, Func<bool> condition)
     {
         var stateTransition = new StateTransition(null, to, condition);
@@ -31,6 +33,8 @@ public class StateMachine
         _currentState = state;
         Debug.Log($"Changed to state {state}");
         _currentState.OnEnter();
+        
+        OnStateChanged?.Invoke(_currentState);
     }
 
     public void Tick()

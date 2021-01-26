@@ -12,18 +12,18 @@ public class Item : MonoBehaviour
     public CrosshairDefinition CrosshairDefinition => _crosshairDefinition;
     public Sprite Icon => _icon;
 
-    private bool _wasPickedUp;
+    public bool WasPickedUp;
     
     private void OnTriggerEnter(Collider other)
     {
-        if (_wasPickedUp)
+        if (WasPickedUp)
             return;
 
         var inventory = other.GetComponent<Inventory>();
         if (inventory != null)
         {
             inventory.Pickup(this);
-            _wasPickedUp = true;
+            WasPickedUp = true;
         }
     }
 

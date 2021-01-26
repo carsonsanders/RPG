@@ -10,6 +10,8 @@ public class EntityStateMachine : MonoBehaviour
     private Entity _entity;
 
     public Type CurrentStateType => _stateMachine.CurrentState.GetType();
+    public event Action<IState> OnEntityStateChanged;
+
     private void Awake()
     {
         var player = FindObjectOfType<Player>();
@@ -17,6 +19,7 @@ public class EntityStateMachine : MonoBehaviour
         _entity = GetComponent<Entity>();
         
         _stateMachine = new StateMachine();
+        _stateMachine.OnStateChanged += state => OnEntityStateChanged?.Invoke(state);
 
         var idle = new Idle();
         var chasePlayer = new ChasePlayer(_navMeshAgent, player);
