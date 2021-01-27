@@ -38,11 +38,15 @@ public class GameStateMachine : MonoBehaviour
         _stateMachine.AddTransition(loadLevel, play, loadLevel.Finished);
         _stateMachine.AddTransition(play, pause, ()=>Input.GetKeyDown(KeyCode.Escape));
         _stateMachine.AddTransition(pause, play, ()=>Input.GetKeyDown(KeyCode.Escape));
-        _stateMachine.AddTransition(pause, menu, ()=>RestartButton.Pressed);
+        _stateMachine.AddTransition(pause, loadLevel, ()=>RestartButton.Pressed);
     }
 
     private void Update()
     {
+        if (RestartButton.Pressed)
+        {
+            PlayButton.LevelToLoad = "Menu";
+        }
         _stateMachine.Tick();
     }
 }
@@ -57,7 +61,8 @@ public class Menu : IState
     public void OnEnter()
     {
         PlayButton.LevelToLoad = null;
-        //SceneManager.LoadSceneAsync("Menu"); //Crashes unity for some reason
+        //SceneManager.LoadScene("Menu"); //Crashes unity for some reason
+
     }
 
     public void OnExit()
@@ -97,7 +102,8 @@ public class LoadLevel : IState
     public void OnEnter()
     {
         _operations.Add(SceneManager.LoadSceneAsync(PlayButton.LevelToLoad));
-        _operations.Add(SceneManager.LoadSceneAsync("UI", LoadSceneMode.Additive));
+        if(PlayButton.LevelToLoad != "Menu")
+            _operations.Add(SceneManager.LoadSceneAsync("UI", LoadSceneMode.Additive));
     }
 
     public void OnExit()
