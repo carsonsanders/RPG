@@ -34,6 +34,7 @@ public class GameStateMachine : MonoBehaviour
         _stateMachine.AddTransition(loadLevel, play, loadLevel.Finished);
         _stateMachine.AddTransition(play, pause, ()=>Input.GetKeyDown(KeyCode.Escape));
         _stateMachine.AddTransition(pause, play, ()=>Input.GetKeyDown(KeyCode.Escape));
+        _stateMachine.AddTransition(pause, loadLevel, ()=>RestartButton.Pressed);
     }
 
     private void Update()
