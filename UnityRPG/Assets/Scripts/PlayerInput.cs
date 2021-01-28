@@ -16,8 +16,8 @@ public class PlayerInput : MonoBehaviour, IPlayerInput
     public float Horizontal => Input.GetAxis("Horizontal");
 
     public float MouseX => Input.GetAxis("Mouse X");
-    
-    public bool PausePressed { get; }
+
+    public bool PausePressed => Input.GetKeyDown(KeyCode.Escape);
 
 
     public void Tick()
