@@ -8,7 +8,8 @@ using UnityEngine.SceneManagement;
 public class GameStateMachine : MonoBehaviour
 {
     public static event Action<IState> OnGameStateChanged;
-    
+
+    private static GameStateMachine _instance;
     private bool _initialized;
     
     private StateMachine _stateMachine;
@@ -16,11 +17,13 @@ public class GameStateMachine : MonoBehaviour
 
     private void Awake()
     {
-        if (_initialized)
+        if (_instance != null)
         {
             Destroy(gameObject);
             return;
         }
+
+        _instance = this;
 
         _initialized = true;
         DontDestroyOnLoad(gameObject);
