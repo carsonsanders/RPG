@@ -11,6 +11,11 @@ namespace state_machine
 {
     public class game_state_machine
     {
+        [SetUp]
+        public void setup()
+        {
+            PlayerInput.Instance = Substitute.For<IPlayerInput>();
+        }
         [TearDown]
         public void teardown()
         {
@@ -59,6 +64,8 @@ namespace state_machine
             yield return new WaitUntil(()=>stateMachine.CurrentStateType == typeof(Play));
             
             //hit pause
+            PlayerInput.Instance.PausePressed.Returns(true);
+            yield return null;
             
             
             Assert.AreEqual(typeof(Pause), stateMachine.CurrentStateType);
