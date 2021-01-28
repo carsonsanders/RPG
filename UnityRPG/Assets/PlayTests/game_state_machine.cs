@@ -1,5 +1,6 @@
 ﻿using a_player;
 using System.Collections;
+using NSubstitute;
 using NUnit.Framework;
 using UnityEditor;
 using UnityEditor.VersionControl;
@@ -44,6 +45,23 @@ namespace state_machine
             yield return new WaitUntil(()=>stateMachine.CurrentStateType == typeof(Play));
             
             Assert.AreEqual(typeof(Play), stateMachine.CurrentStateType);
+        }
+        
+        [UnityTest]
+        public IEnumerator switched_to_pause_from_play_when_pause_button_pressed()
+        {
+            yield return helpers.LoadMenuScene();
+            var stateMachine = GameObject.FindObjectOfType<GameStateMachine>();
+            
+            Assert.AreEqual(typeof(Menu), stateMachine.CurrentStateType);
+            PlayButton.LevelToLoad = "Level1";
+
+            yield return new WaitUntil(()=>stateMachine.CurrentStateType == typeof(Play));
+            
+            //hit pause
+            
+            
+            Assert.AreEqual(typeof(Pause), stateMachine.CurrentStateType);
         }
 
         [UnityTest]

@@ -4,66 +4,11 @@ using NUnit.Framework;
 using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 using UnityEngine.UI;
 
 namespace a_player
 {
-    public static class helpers
-    {
-        public static IEnumerator LoadMovementTestsScene()
-        {
-            var operation = SceneManager.LoadSceneAsync("MovementTests");
-            while (operation.isDone == false)
-                yield return null;
-        }
-        
-        public static IEnumerator LoadItemTestsScene()
-        {
-            var operation = SceneManager.LoadSceneAsync("ItemTests");
-            while (operation.isDone == false)
-                yield return null;
-            
-            operation = SceneManager.LoadSceneAsync("UI", LoadSceneMode.Additive);
-            while (operation.isDone == false)
-                yield return null;
-        }
-        
-        public static IEnumerator LoadEntityStateMachineTestsScene()
-        {
-            var operation = SceneManager.LoadSceneAsync("EntityStateMachineTests");
-            while (operation.isDone == false)
-                yield return null;
-        }
-        
-        public static IEnumerator LoadMenuScene()
-        {
-            var operation = SceneManager.LoadSceneAsync("Menu");
-            while (operation.isDone == false)
-                yield return null;
-        }
-
-        public static Player GetPlayer()
-        {
-            Player player = GameObject.FindObjectOfType<Player>();
-
-            var testPlayerInput = Substitute.For<IPlayerInput>();
-            player.playerInput = testPlayerInput;
-
-            return player;
-        }
-
-        public static float CalculateTurn(Quaternion originalRotation, Quaternion transformRotation)
-        {
-            var cross = Vector3.Cross(originalRotation * Vector3.forward, transformRotation * Vector3.forward);
-            var dot = Vector3.Dot(cross, Vector3.up);
-            return dot;
-        }
-
-
-        
-    }
     public class with_positive_vertical_inputs
     {
         [UnityTest]
@@ -74,8 +19,8 @@ namespace a_player
             var player = helpers.GetPlayer();
 
             //ACT
-            player.playerInput.Vertical.Returns(1f);
-            player.playerInput.Horizontal.Returns(1f);
+            PlayerInput.Instance.Vertical.Returns(1f);
+            PlayerInput.Instance.Horizontal.Returns(1f);
             
             float startingZPosition = player.transform.position.z;
             float startingXPosition = player.transform.position.x;
@@ -101,8 +46,8 @@ namespace a_player
             var player = helpers.GetPlayer();
 
             //ACT
-            player.playerInput.Vertical.Returns(-1f);
-            player.playerInput.Horizontal.Returns(-1f);
+            PlayerInput.Instance.Vertical.Returns(-1f);
+            PlayerInput.Instance.Horizontal.Returns(-1f);
             
             float startingZPosition = player.transform.position.z;
             float startingXPosition = player.transform.position.x;
@@ -127,7 +72,7 @@ namespace a_player
             yield return helpers.LoadMovementTestsScene();
             var player = helpers.GetPlayer();
 
-            player.playerInput.MouseX.Returns(-1f);
+            PlayerInput.Instance.MouseX.Returns(-1f);
 
             var originalRotation = player.transform.rotation;
             yield return new WaitForSeconds(0.2f);
@@ -146,7 +91,7 @@ namespace a_player
             yield return helpers.LoadMovementTestsScene();
             var player = helpers.GetPlayer();
 
-            player.playerInput.MouseX.Returns(1f);
+            PlayerInput.Instance.MouseX.Returns(1f);
 
             var originalRotation = player.transform.rotation;
             yield return new WaitForSeconds(0.2f);
@@ -162,11 +107,12 @@ namespace a_player
         public IEnumerator item_pickup()
         {
             //Arrange
+            PlayerInput.Instance = Substitute.For<IPlayerInput>();
             yield return helpers.LoadMovementTestsScene();
             var player = helpers.GetPlayer();
 
             //ACT (move forward to pick it up)
-            player.playerInput.Vertical.Returns(1f);
+            PlayerInput.Instance.Vertical.Returns(1f);
             Item item = Object.FindObjectOfType<Item>();
 
             yield return new WaitForSeconds(1f);
@@ -181,12 +127,13 @@ namespace a_player
         public IEnumerator crosshair_change()
         {
             //Arrange
+            PlayerInput.Instance = Substitute.For<IPlayerInput>();
             yield return helpers.LoadItemTestsScene();
             var player = helpers.GetPlayer();
             var crosshair = Object.FindObjectOfType<Crosshair>();
 
             //ACT (move forward to pick it up)
-            player.playerInput.Vertical.Returns(1f);
+            PlayerInput.Instance.Vertical.Returns(1f);
             Item item = Object.FindObjectOfType<Item>();
             
             Assert.AreNotSame(item.CrosshairDefinition.Sprite, crosshair.GetComponent<Image>().sprite);
@@ -200,13 +147,14 @@ namespace a_player
         public IEnumerator change_slot1_icon_to_match_item_icon()
         {
             //Arrange
+            PlayerInput.Instance = Substitute.For<IPlayerInput>();
             yield return helpers.LoadItemTestsScene();
             var player = helpers.GetPlayer();
             var hotbar = Object.FindObjectOfType<Hotbar>();
             var slotOne = hotbar.GetComponentInChildren<Slot>();
 
             //ACT (move forward to pick it up)
-            player.playerInput.Vertical.Returns(1f);
+            PlayerInput.Instance.Vertical.Returns(1f);
             Item item = Object.FindObjectOfType<Item>();
             
             Assert.AreNotSame(item.Icon, slotOne.IconImage.sprite);

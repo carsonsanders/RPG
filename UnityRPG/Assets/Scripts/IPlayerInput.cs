@@ -10,4 +10,5 @@ public interface IPlayerInput
     float MouseX { get; }
     
     void Tick();
+    bool PausePressed { get; }
 }

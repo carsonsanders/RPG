@@ -1,14 +1,23 @@
 ﻿using System;
 using UnityEngine;
 
-public class PlayerInput : IPlayerInput
+public class PlayerInput : MonoBehaviour, IPlayerInput
 {
+    public static IPlayerInput Instance { get; set; }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     public event Action<int> HotkeyPressed;
     public event Action MoveModeTogglePressed;
     public float Vertical => Input.GetAxis("Vertical");
     public float Horizontal => Input.GetAxis("Horizontal");
 
     public float MouseX => Input.GetAxis("Mouse X");
+    
+    public bool PausePressed { get; }
 
 
     public void Tick()

@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     private CharacterController characterController;
     private IMover _mover;
     private Rotator _rotator;
-    public IPlayerInput playerInput { get; set; }= new PlayerInput();
+    
     
     private void Awake()
     {
@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
         _mover = new Mover(this);//new NavmeshMover(this); //Mover(this);
         _rotator = new Rotator(this);
 
-        playerInput.MoveModeTogglePressed += MoveModeTogglePressed;
+        PlayerInput.Instance.MoveModeTogglePressed += MoveModeTogglePressed;
     }
 
     private void MoveModeTogglePressed()
@@ -36,6 +36,5 @@ public class Player : MonoBehaviour
         
         _mover.Tick();
         _rotator.Tick();
-        playerInput.Tick();
     }
 }
