@@ -31,16 +31,22 @@ namespace PlayTests
         }
 
         [Test]
-        public void bound_to_inventory_with_1_item_fills_only_first_slot()
+        public void bound_to_inventory_fills_slot_for_each_item([NUnit.Framework.Range(0, 25)] int numberOfItems)
         {
             var inventoryPanel = GetInventoryPanel();
-            var inventory = GetInventory();
-            var item = GetItem();
-            inventory.Pickup(item);
+            var inventory = GetInventory(numberOfItems);
 
-            Assert.IsTrue(inventoryPanel.Slots[0].IsEmpty);
+            foreach (var slot in inventoryPanel.Slots)
+            {
+                Assert.IsTrue(slot.IsEmpty);
+            }
+            
             inventoryPanel.Bind(inventory);
-            Assert.IsFalse(inventoryPanel.Slots[0].IsEmpty);
+            for (int i = 0; i < inventoryPanel.SlotCount; i++)
+            {
+                bool shouldBeEmpty = i >= numberOfItems;
+                Assert.AreEqual(shouldBeEmpty, inventoryPanel.Slots[i].IsEmpty);
+            }
         }
 
         private Item GetItem()
@@ -49,9 +55,16 @@ namespace PlayTests
             return itemGameObject.AddComponent<Item>();
         }
 
-        private Inventory GetInventory()
+        private Inventory GetInventory(int numberOfItems = 0)
         {
-            return new GameObject("Inventory").AddComponent<Inventory>();
+            var inventory = new GameObject("Inventory").AddComponent<Inventory>();
+            for (int i = 0; i < numberOfItems; i++)
+            {
+                var item = GetItem();
+                inventory.Pickup(item);
+            }
+
+            return inventory;
         }
 
         private UIInventoryPanel GetInventoryPanel()
