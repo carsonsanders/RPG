@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
-public class Item : MonoBehaviour
+public class Item : MonoBehaviour, IItem
 {
     [SerializeField] private CrosshairDefinition _crosshairDefinition;
     [SerializeField] private UseAction[] _actions = new UseAction[0];
@@ -36,6 +36,11 @@ public class Item : MonoBehaviour
         if(collider.isTrigger == false)
             collider.isTrigger = true;
     }
+}
+
+public interface IItem
+{
+    Sprite Icon { get; }
 }
 
 [CustomEditor(typeof(Item))]
