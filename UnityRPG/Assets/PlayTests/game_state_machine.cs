@@ -10,6 +10,12 @@ namespace state_machine
 {
     public class game_state_machine
     {
+        [TearDown]
+        public void teardown()
+        {
+            GameObject.Destroy(Object.FindObjectOfType<GameStateMachine>());
+        }
+        
         [UnityTest]
         public IEnumerator switched_to_loading_when_level_to_load_selected()
         {
@@ -26,8 +32,6 @@ namespace state_machine
         [UnityTest]
         public IEnumerator switched_to_play_when_level_to_load_completed()
         {
-            GameObject.Destroy(Object.FindObjectOfType<GameStateMachine>());
-            
             yield return helpers.LoadMenuScene();
             var stateMachine = GameObject.FindObjectOfType<GameStateMachine>();
             
