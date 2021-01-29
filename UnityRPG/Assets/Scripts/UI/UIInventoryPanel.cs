@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Runtime.InteropServices;
 using NSubstitute.ClearExtensions;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -28,9 +29,31 @@ public class UIInventoryPanel : MonoBehaviour
 
     private void HandleSlotClicked(UIInventorySlot slot)
     {
+        if (Selected != null)
+        {
+            Swap(slot);
+        }
         Selected = slot;
     }
-    
+
+    private void Swap(UIInventorySlot slot)
+    {
+        _inventory.Move(GetSlotIndex(Selected), GetSlotIndex(slot));
+    }
+
+    private int GetSlotIndex(UIInventorySlot selected)
+    {
+        for (int i = 0; i < SlotCount; i++)
+        {
+            if (Slots[i] == selected)
+            {
+                return i;
+            }
+            
+        }
+        return -1; //shouldn't happen
+    }
+
     public void Bind(Inventory inventory)
     {
         if (_inventory != null)

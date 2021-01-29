@@ -8,17 +8,6 @@ using UnityEngine.TestTools;
 
 namespace PlayTests
 {
-    public class inventory_selection_with_nothing_selected
-    {
-        [Test]
-        public void clicking_non_empty_slot_selects_slot()
-        {
-            var inventoryPanel = inventory_panel.GetInventoryPanel();
-            var slot = inventoryPanel.Slots[0];
-            slot.OnPointerClick(null);
-            Assert.AreSame(slot, inventoryPanel.Selected);
-        }
-    }
     public class ui_inventory_slot
     {
         [Test]
@@ -135,12 +124,14 @@ namespace PlayTests
 
         private Item GetItem()
         {
+            return inventory_helpers.GetItem();
             var itemGameObject = new GameObject("Item", typeof(SphereCollider));
             return itemGameObject.AddComponent<Item>();
         }
 
         private Inventory GetInventory(int numberOfItems = 0)
         {
+            return inventory_helpers.GetInventory(numberOfItems);
             var inventory = new GameObject("Inventory").AddComponent<Inventory>();
             for (int i = 0; i < numberOfItems; i++)
             {
@@ -150,11 +141,12 @@ namespace PlayTests
 
             return inventory;
         }
-
+        
         public static UIInventoryPanel GetInventoryPanel()
         {
             var prefab = AssetDatabase.LoadAssetAtPath<UIInventoryPanel>("Assets/Prefabs/UI/InventoryPanel.prefab");
             return Object.Instantiate(prefab);
         }
+        
     }
 }
