@@ -109,6 +109,19 @@ namespace PlayTests
             }
         }
 
+        [Test]
+        public void updates_slots_when_items_are_moved()
+        {
+            var inventoryPanel = GetInventoryPanel();
+            var inventory = GetInventory(1);
+            inventoryPanel.Bind(inventory);
+
+            inventory.Move(0, 4);
+            Assert.AreSame(inventory.GetItemInSlot(4), inventoryPanel.Slots[4].Item);
+
+
+        }
+
         private Item GetItem()
         {
             var itemGameObject = new GameObject("Item", typeof(SphereCollider));

@@ -26,6 +26,20 @@ namespace PlayTests
             
             Assert.AreEqual(item,inventory.GetItemInSlot(5));
         }
+
+        [Test]
+        public void can_move_item_to_empty_slot()
+        {
+            Inventory inventory = new GameObject("INVENTORY").AddComponent<Inventory>();
+            Item item = new GameObject("ITEM", typeof(SphereCollider)).AddComponent<Item>();
+            inventory.Pickup(item);
+            
+            Assert.AreEqual(item,inventory.GetItemInSlot(0));
+
+            inventory.Move(0, 4);
+            
+            Assert.AreEqual(item, inventory.GetItemInSlot(4));
+        }
         
         // Change slots/move items
         // Remove Items

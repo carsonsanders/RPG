@@ -19,19 +19,28 @@ public class UIInventoryPanel : MonoBehaviour
     public void Bind(Inventory inventory)
     {
         if (_inventory != null)
+        {
             _inventory.ItemPickedUp -= HandleItemPickedUp;
+            _inventory.OnItemChanged -= HandleItemChanged;
+        }
         
         _inventory = inventory;
         
         if(_inventory != null)
         {
             _inventory.ItemPickedUp += HandleItemPickedUp;
+            _inventory.OnItemChanged += HandleItemChanged;
             RefreshSlots();
         }
         else
         {
             ClearSlots();
         }
+    }
+
+    private void HandleItemChanged(int slotNumber)
+    {
+        Slots[slotNumber].setItem(_inventory.GetItemInSlot(slotNumber));
     }
 
     private void ClearSlots()
