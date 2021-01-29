@@ -1,19 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
+    public const int DEFAULT_INVENTORY_SIZE = 25;
     public event Action<Item> ActiveItemChanged;
     public event Action<Item> ItemPickedUp;
     
     [SerializeField] private Transform _rightHand;
     
-    private List<Item> _items = new List<Item>();
+    private Item[] _items = new Item[DEFAULT_INVENTORY_SIZE];
     private Transform _itemRoot;
     
     public Item ActiveItem { get; private set; }
-    public List<Item> Items => _items;
+    public List<Item> Items => _items.ToList(); //PLACEHOLDER
+    public int Count => _items.Count(t => t != null);
 
     private void Awake()
     {
@@ -21,14 +24,31 @@ public class Inventory : MonoBehaviour
         _itemRoot.transform.SetParent(transform);
     }
 
-    public void Pickup(Item item)
+    public void Pickup(Item item, int? slot = null)
     {
-        _items.Add(item);
+        if (slot.HasValue == false)
+            slot = FindFirstAvailableSlot();
+        
+        if (slot.HasValue == false)
+            return;
+        
+        _items[slot.Value] = item;
         item.transform.SetParent(_itemRoot);
         ItemPickedUp?.Invoke(item);
         item.WasPickedUp = true;
 
         Equip(item);
+    }
+
+    private int? FindFirstAvailableSlot()
+    {
+        for (int i = 0; i < _items.Length; i++)
+        {
+            if (_items[i] == null)
+                return i;
+        }
+
+        return null;
     }
 
     public void Equip(Item item)
@@ -50,5 +70,9 @@ public class Inventory : MonoBehaviour
         ActiveItemChanged?.Invoke(ActiveItem);
     }
 
-    
+
+    public Item GetItemInSlot(int slot)
+    {
+        return _items[slot];
+    }
 }
