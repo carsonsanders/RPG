@@ -1,8 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UIInventorySlot : MonoBehaviour
+public class UIInventorySlot : MonoBehaviour, IPointerClickHandler
 {
+    public event Action<UIInventorySlot> OnSlotClicked;
+    
     [SerializeField] private Image _image;
     
     public bool IsEmpty => Item == null;
@@ -18,5 +22,10 @@ public class UIInventorySlot : MonoBehaviour
     {
         Item = item;
         _image.sprite = item != null ? item.Icon : null;
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        OnSlotClicked?.Invoke(this);
     }
 }

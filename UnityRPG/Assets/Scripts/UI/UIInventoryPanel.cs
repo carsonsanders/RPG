@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using NSubstitute.ClearExtensions;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class UIInventoryPanel : MonoBehaviour
 {
@@ -8,14 +9,28 @@ public class UIInventoryPanel : MonoBehaviour
     
     public UIInventorySlot[] Slots;
 
+    public int SlotCount => Slots.Length;
+    public UIInventorySlot Selected { get; private set; }
 
     private void Awake()
     {
         Slots = GetComponentsInChildren<UIInventorySlot>();
+        RegisterSlotsForClickCallback();
     }
 
-    public int SlotCount => Slots.Length;
+    private void RegisterSlotsForClickCallback()
+    {
+        foreach (var slot in Slots)
+        {
+            slot.OnSlotClicked += HandleSlotClicked;
+        }
+    }
 
+    private void HandleSlotClicked(UIInventorySlot slot)
+    {
+        Selected = slot;
+    }
+    
     public void Bind(Inventory inventory)
     {
         if (_inventory != null)
@@ -68,4 +83,5 @@ public class UIInventoryPanel : MonoBehaviour
     {
         RefreshSlots();
     }
+    
 }
