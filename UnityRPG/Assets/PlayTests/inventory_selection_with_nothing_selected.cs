@@ -7,11 +7,21 @@ namespace PlayTests
         [Test]
         public void clicking_non_empty_slot_selects_slot()
         {
-            var inventoryPanel = inventory_panel.GetInventoryPanel();
+            var inventoryPanel = inventory_helpers.GetInventoryPanelWithItems(1);
             var slot = inventoryPanel.Slots[0];
             slot.OnPointerClick(null);
             Assert.AreSame(slot, inventoryPanel.Selected);
         }
+        
+        [Test]
+        public void clicking_empty_slot_does_not_select_slot()
+        {
+            var inventoryPanel = inventory_helpers.GetInventoryPanelWithItems(0);
+            var slot = inventoryPanel.Slots[0];
+            slot.OnPointerClick(null);
+            Assert.IsNull(inventoryPanel.Selected);
+        }
+        
     }
     
     public class inventory_selection_with_non_empty_slot_selected
@@ -33,6 +43,20 @@ namespace PlayTests
             
             Assert.AreSame(item0, slot1.Item);
             Assert.AreSame(item1, slot0.Item);
+        }
+        
+        [Test]
+        public void clicking_slot_clears_selection()
+        {
+            var inventoryPanel = inventory_helpers.GetInventoryPanelWithItems(2);
+            var slot0 = inventoryPanel.Slots[0];
+            var slot1 = inventoryPanel.Slots[1];
+            
+
+            slot0.OnPointerClick(null);
+            Assert.IsNotNull(inventoryPanel.Selected);
+            slot1.OnPointerClick(null);
+            Assert.IsNull(inventoryPanel.Selected);
         }
     }
 }
