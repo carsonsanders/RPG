@@ -12,6 +12,7 @@ public class UIInventorySlot : MonoBehaviour, IPointerClickHandler
     public bool IsEmpty => Item == null;
     public Sprite Icon => _image.sprite;
     public IItem Item { get; private set; }
+    public bool IconImageEnabled => _image.enabled;
 
     public void Clear()
     {
@@ -22,6 +23,7 @@ public class UIInventorySlot : MonoBehaviour, IPointerClickHandler
     {
         Item = item;
         _image.sprite = item != null ? item.Icon : null;
+        _image.enabled = Item != null;
     }
 
     public void OnPointerClick(PointerEventData eventData)

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1986052517052398895}
   - component: {fileID: 1986052517052398880}
   - component: {fileID: 1986052517052398881}
+  - component: {fileID: 1986052516914383993}
   m_Layer: 5
   m_Name: InventoryPanel
   m_TagString: Untagged
@@ -29,7 +30,7 @@ RectTransform:
   m_GameObject: {fileID: 1986052517052398883}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3638135, y: 0.3638135, z: 0.3638135}
   m_Children:
   - {fileID: 4029754067143938155}
   - {fileID: 8595210842614457931}
@@ -62,7 +63,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1980, y: 1080}
+  m_SizeDelta: {x: 1325, y: 1325}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1986052517052398894
 CanvasRenderer:
@@ -85,7 +86,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0, g: 0.018966198, b: 0.8113208, a: 0.52156866}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -113,6 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 656e66008c1d77a48a4b4a177bfecc2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Slots: []
 --- !u!114 &1986052517052398881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,17 +128,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 0
+    m_Left: 10
+    m_Right: 10
+    m_Top: 10
+    m_Bottom: 10
+  m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 100, y: 100}
-  m_Spacing: {x: 0, y: 0}
-  m_Constraint: 0
-  m_ConstraintCount: 2
+  m_CellSize: {x: 250, y: 250}
+  m_Spacing: {x: 10, y: 10}
+  m_Constraint: 1
+  m_ConstraintCount: 5
+--- !u!114 &1986052516914383993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1986052517052398883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ef0949707cc9604bb54e6387e60387d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1986052515778025392
 PrefabInstance:
   m_ObjectHideFlags: 0

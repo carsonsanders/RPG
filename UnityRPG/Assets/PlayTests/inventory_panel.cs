@@ -24,6 +24,31 @@ namespace PlayTests
             
             Assert.AreSame(sprite,slot.Icon);
         }
+        
+        [Test]
+        public void when_item_is_set_image_is_enabled()
+        {
+            var inventoryPanel = inventory_panel.GetInventoryPanel();
+            var slot = inventoryPanel.Slots[0];
+            var item = Substitute.For<IItem>();
+            var sprite = Sprite.Create(Texture2D.redTexture,new Rect(0,0,4,4), Vector2.zero);
+            item.Icon.Returns(sprite);
+            
+            slot.setItem(item);
+
+            Assert.IsTrue(slot.IconImageEnabled);
+        }
+        
+        [Test]
+        public void when_item_is_not_set_image_is_disabled()
+        {
+            var inventoryPanel = inventory_panel.GetInventoryPanel();
+            var slot = inventoryPanel.Slots[0];
+
+            slot.setItem(null);
+
+            Assert.IsFalse(slot.IconImageEnabled);
+        }
     }
     public class inventory_panel
     {
