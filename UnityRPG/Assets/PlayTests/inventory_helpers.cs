@@ -1,5 +1,7 @@
-﻿using UnityEditor;
+﻿using System.Collections;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace PlayTests
 {
@@ -35,6 +37,17 @@ namespace PlayTests
         {
             var prefab = AssetDatabase.LoadAssetAtPath<UISelectionCursor>("Assets/Prefabs/UI/SelectionCursor.prefab");
             return Object.Instantiate(prefab);
+        }
+
+        public static IEnumerator LoadUITestScene()
+        {
+            var operation = SceneManager.LoadSceneAsync("ItemTests");
+            while (operation.isDone == false)
+                yield return null;
+            
+            operation = SceneManager.LoadSceneAsync("UI", LoadSceneMode.Additive);
+            while (operation.isDone == false)
+                yield return null;
         }
     }
 

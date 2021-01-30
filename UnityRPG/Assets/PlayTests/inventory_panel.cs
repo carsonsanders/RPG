@@ -52,12 +52,13 @@ namespace PlayTests
     }
     public class inventory_panel
     {
-        [Test]
-        public void inventory_has_25_slots()
+        [UnityTest]
+        public IEnumerator inventory_has_29_slots()
         {
-            var inventoryPanel = GetInventoryPanel();
+            yield return inventory_helpers.LoadUITestScene();
+            var inventoryPanel = GameObject.FindObjectOfType<UIInventoryPanel>();           
             
-            Assert.AreEqual(25, inventoryPanel.SlotCount);
+            Assert.AreEqual(29, inventoryPanel.SlotCount);
         }
 
         [Test]
