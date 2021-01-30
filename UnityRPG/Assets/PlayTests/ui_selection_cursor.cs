@@ -1,5 +1,10 @@
-﻿using System.Linq;
+﻿using System.Collections;
+using System.Linq;
+using a_player;
+using NSubstitute;
 using NUnit.Framework;
+using UnityEngine;
+using UnityEngine.TestTools;
 using UnityEngine.UI;
 
 namespace PlayTests
@@ -46,7 +51,36 @@ namespace PlayTests
             inventoryPanel.Slots.First().OnPointerClick(null);
             Assert.IsFalse(uiCursor.IconVisible);
         }
-        
+
+        [UnityTest]
+        public IEnumerator moves_with_mouse_cursor()
+        {
+            yield return helpers.LoadItemTestsScene();
+
+            var uiCursor = Object.FindObjectOfType<UISelectionCursor>();
+
+            PlayerInput.Instance = Substitute.For<IPlayerInput>();
+            
+            for(int i = 0; i < 100; i++)
+            {
+                var mousePosition = new Vector2(100 + i, 100 + i);
+                PlayerInput.Instance.MousePosition.Returns(mousePosition);
+
+                yield return null;
+
+                Assert.AreEqual(new Vector3(mousePosition.x, mousePosition.y, 0), uiCursor.transform.position);
+            }
+        }
+
+        [Test]
+        public void disables_raycastTarget()
+        {
+            var inventoryPanel = inventory_helpers.GetInventoryPanelWithItems(1);
+            var uiCursor = inventory_helpers.GetSelectionCursor();
+
+            var image = uiCursor.GetComponent<Image>();
+            Assert.IsFalse(image.raycastTarget);
+        }
         
     }
 }

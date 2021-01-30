@@ -30,4 +30,9 @@ public class UISelectionCursor : MonoBehaviour
         _image.sprite = _inventoryPanel.Selected ? _inventoryPanel.Selected?.Icon: null;
         _image.enabled = _image.sprite != null;
     }
+
+    private void Update()
+    {
+        transform.position = PlayerInput.Instance.MousePosition;
+    }
 }
