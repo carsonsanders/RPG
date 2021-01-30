@@ -9,7 +9,7 @@ namespace PlayTests
         {
             var inventoryPanel = inventory_helpers.GetInventoryPanelWithItems(1);
             var slot = inventoryPanel.Slots[0];
-            slot.OnPointerClick(null);
+            slot.OnPointerDown(null);
             Assert.AreSame(slot, inventoryPanel.Selected);
         }
         
@@ -18,7 +18,7 @@ namespace PlayTests
         {
             var inventoryPanel = inventory_helpers.GetInventoryPanelWithItems(0);
             var slot = inventoryPanel.Slots[0];
-            slot.OnPointerClick(null);
+            slot.OnPointerDown(null);
             Assert.IsNull(inventoryPanel.Selected);
         }
         
@@ -38,8 +38,8 @@ namespace PlayTests
             Assert.IsNotNull(item0);
             Assert.IsNotNull(item1);
 
-            slot0.OnPointerClick(null);
-            slot1.OnPointerClick(null);
+            slot0.OnPointerDown(null);
+            slot1.OnPointerDown(null);
             
             Assert.AreSame(item0, slot1.Item);
             Assert.AreSame(item1, slot0.Item);
@@ -53,9 +53,9 @@ namespace PlayTests
             var slot1 = inventoryPanel.Slots[1];
             
 
-            slot0.OnPointerClick(null);
+            slot0.OnPointerDown(null);
             Assert.IsNotNull(inventoryPanel.Selected);
-            slot1.OnPointerClick(null);
+            slot1.OnPointerDown(null);
             Assert.IsNull(inventoryPanel.Selected);
         }
     }
