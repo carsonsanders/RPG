@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Linq;
 using System.Runtime.InteropServices;
 using NSubstitute.ClearExtensions;
 using UnityEngine;
@@ -17,7 +18,11 @@ public class UIInventoryPanel : MonoBehaviour
 
     private void Awake()
     {
-        Slots = FindObjectsOfType<UIInventorySlot>();
+        Slots = FindObjectsOfType<UIInventorySlot>()
+            .OrderByDescending(t =>t.SortIndex)
+            .ThenBy(t => t.name)
+            .ToArray();
+        
         RegisterSlotsForClickCallback();
     }
 

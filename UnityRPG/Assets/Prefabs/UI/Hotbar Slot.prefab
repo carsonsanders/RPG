@@ -238,6 +238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _image: {fileID: 8964931662344614184}
+  _sortIndex: 1
 --- !u!1 &3173671222085999634
 GameObject:
   m_ObjectHideFlags: 0
