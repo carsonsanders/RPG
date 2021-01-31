@@ -5,6 +5,5 @@
     Secondary,
     Head,
     Chest,
-    Legs,
     Feet
 }

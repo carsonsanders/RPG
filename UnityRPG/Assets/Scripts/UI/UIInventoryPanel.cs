@@ -82,16 +82,27 @@ public class UIInventoryPanel : MonoBehaviour
 
     public void Bind(Inventory inventory)
     {
+        var availableUiSlots = Slots.OrderBy(t => t.SortIndex).ToList();
+        
         if (_inventory != null)
         {
-            _inventory.ItemPickedUp -= HandleItemPickedUp;
-            _inventory.OnItemChanged -= HandleItemChanged;
+            RemoveExistingInventoryBindings();
         }
         
         _inventory = inventory;
         
         if(_inventory != null)
         {
+            for (int i = 0; i < _inventory.Slots.Count; i++)
+            {
+                var inventorySlot = _inventory.Slots[i];
+                Debug.Log($"Slot: {i}, SlotType: {inventorySlot.SlotType}, ");
+                var uiSlot = availableUiSlots.FirstOrDefault(t => t.SlotType == inventorySlot.SlotType);
+                if(uiSlot != null)
+                    uiSlot.Bind(inventorySlot);
+            }
+            
+            
             _inventory.ItemPickedUp += HandleItemPickedUp;
             _inventory.OnItemChanged += HandleItemChanged;
             RefreshSlots();
@@ -100,6 +111,12 @@ public class UIInventoryPanel : MonoBehaviour
         {
             ClearSlots();
         }
+    }
+
+    private void RemoveExistingInventoryBindings()
+    {
+        _inventory.ItemPickedUp -= HandleItemPickedUp;
+        _inventory.OnItemChanged -= HandleItemChanged;
     }
 
     private void HandleItemChanged(int slotNumber)

@@ -48,7 +48,7 @@ namespace PlayTests
             Assert.IsFalse(uiCursor.IconVisible);
             inventoryPanel.Slots.First().OnPointerDown(null);
             Assert.IsTrue(uiCursor.IconVisible);
-            inventoryPanel.Slots.First().OnPointerDown(null);
+            inventoryPanel.Slots[6].OnPointerDown(null);
             Assert.IsFalse(uiCursor.IconVisible);
         }
 
