@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -10,6 +11,8 @@ public class Item : MonoBehaviour, IItem
     [SerializeField] private UseAction[] _actions = new UseAction[0];
     [SerializeField] private Sprite _icon;
     [SerializeField] private StatMod[] _statMods;
+
+    public StatMod[] StatMods => _statMods;
     public event Action OnPickedUp;
     public UseAction[] Actions => _actions;
     public CrosshairDefinition CrosshairDefinition => _crosshairDefinition;

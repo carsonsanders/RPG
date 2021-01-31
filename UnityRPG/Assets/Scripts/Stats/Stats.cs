@@ -23,4 +23,26 @@ public class Stats
         if (_stats.ContainsKey(statType))
             _stats[statType] -= value;
     }
+
+    public void Bind(Inventory inventory)
+    {
+        inventory.ItemEquipped += HandleItemEquipped;
+        inventory.ItemUnEquipped += HandleItemUnEquipped;
+    }
+
+    private void HandleItemEquipped(Item item)
+    {
+        foreach (var statMod in item.StatMods)
+        {
+            Add(statMod.StatType, statMod.Value);
+        }
+    }
+    
+    private void HandleItemUnEquipped(Item item)
+    {
+        foreach (var statMod in item.StatMods)
+        {
+            Remove(statMod.StatType, statMod.Value);
+        }
+    }
 }
