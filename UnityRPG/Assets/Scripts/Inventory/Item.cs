@@ -9,6 +9,7 @@ public class Item : MonoBehaviour, IItem
     [SerializeField] private CrosshairDefinition _crosshairDefinition;
     [SerializeField] private UseAction[] _actions = new UseAction[0];
     [SerializeField] private Sprite _icon;
+    [SerializeField] private StatMod[] _statMods;
     public event Action OnPickedUp;
     public UseAction[] Actions => _actions;
     public CrosshairDefinition CrosshairDefinition => _crosshairDefinition;
@@ -52,11 +53,48 @@ public class ItemEditor : Editor
         DrawIcon(item);
         DrawCrosshair(item);
         DrawActions(item);
+        DrawStatmods(item);
 
         //base.OnInspectorGUI();
     }
     
-    
+    private void DrawStatmods(Item item)
+    {
+        using (var statModsProperty = serializedObject.FindProperty("_statMods"))
+        {
+            for (int i = 0; i < statModsProperty.arraySize; i++)
+            {
+                EditorGUILayout.BeginHorizontal();
+                if (GUILayout.Button("X", GUILayout.Width(20)))
+                {
+                    statModsProperty.DeleteArrayElementAtIndex(i);
+                    serializedObject.ApplyModifiedProperties();
+                    break;
+                }
+
+                var statMod = statModsProperty.GetArrayElementAtIndex(i);
+                if (statMod != null)
+                {
+                    var statType = statMod.FindPropertyRelative("StatType");
+                    var valueProperty = statMod.FindPropertyRelative("Value");
+
+                    statType.enumValueIndex =
+                        (int) (StatType) EditorGUILayout.EnumPopup((StatType) statType.enumValueIndex,
+                            GUILayout.Width(120));
+                    EditorGUILayout.PropertyField(valueProperty, GUIContent.none, false);
+                    
+                    serializedObject.ApplyModifiedProperties();
+                }
+                EditorGUILayout.EndHorizontal();
+            }
+
+            if (GUILayout.Button("+ Add Stat"))
+            {
+                statModsProperty.InsertArrayElementAtIndex((statModsProperty.arraySize));
+                serializedObject.ApplyModifiedProperties();
+            }
+        }
+    }
     private void DrawActions(Item item)
     {
         using (var actionsProperty = serializedObject.FindProperty("_actions"))
