@@ -45,6 +45,12 @@ public class Item : MonoBehaviour, IItem
 public interface IItem
 {
     Sprite Icon { get; }
+    GameObject gameObject { get; }
+    Transform transform { get; }
+    
+    CrosshairDefinition CrosshairDefinition { get; }
+    UseAction[] Actions { get; }
+    StatMod[] StatMods { get; }
 }
 
 [CustomEditor(typeof(Item))]

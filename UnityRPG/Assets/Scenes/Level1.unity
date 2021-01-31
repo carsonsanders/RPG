@@ -310,6 +310,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 641768559025686807, guid: 29c4dcf284ae6cd43bf96352eaba18d2,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3cf0665efdb26654fa971856196622b1, type: 2}
+    - target: {fileID: 1724866630420050291, guid: 29c4dcf284ae6cd43bf96352eaba18d2,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3cf0665efdb26654fa971856196622b1, type: 2}
+    - target: {fileID: 3256934661927897648, guid: 29c4dcf284ae6cd43bf96352eaba18d2,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3cf0665efdb26654fa971856196622b1, type: 2}
+    - target: {fileID: 4432942028246512893, guid: 29c4dcf284ae6cd43bf96352eaba18d2,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3cf0665efdb26654fa971856196622b1, type: 2}
+    - target: {fileID: 5610012736009350992, guid: 29c4dcf284ae6cd43bf96352eaba18d2,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3cf0665efdb26654fa971856196622b1, type: 2}
     - target: {fileID: 5848637413921963971, guid: 29c4dcf284ae6cd43bf96352eaba18d2,
         type: 3}
       propertyPath: _icon
@@ -322,11 +347,41 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 43e46be8147b0f748a2c19306f3cc669,
         type: 2}
+    - target: {fileID: 7223730759072032717, guid: 29c4dcf284ae6cd43bf96352eaba18d2,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3cf0665efdb26654fa971856196622b1, type: 2}
+    - target: {fileID: 7325167020762487371, guid: 29c4dcf284ae6cd43bf96352eaba18d2,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3cf0665efdb26654fa971856196622b1, type: 2}
     - target: {fileID: 7654356871093354353, guid: 29c4dcf284ae6cd43bf96352eaba18d2,
         type: 3}
       propertyPath: m_Name
       value: Shotgun (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7947871794666915944, guid: 29c4dcf284ae6cd43bf96352eaba18d2,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3cf0665efdb26654fa971856196622b1, type: 2}
+    - target: {fileID: 8583623551077723509, guid: 29c4dcf284ae6cd43bf96352eaba18d2,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3cf0665efdb26654fa971856196622b1, type: 2}
+    - target: {fileID: 8779738184036209068, guid: 29c4dcf284ae6cd43bf96352eaba18d2,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3cf0665efdb26654fa971856196622b1, type: 2}
+    - target: {fileID: 8890723507766229402, guid: 29c4dcf284ae6cd43bf96352eaba18d2,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3cf0665efdb26654fa971856196622b1, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29c4dcf284ae6cd43bf96352eaba18d2, type: 3}
 --- !u!1 &705507993
@@ -507,6 +562,11 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 5848637413921963971, guid: 29c4dcf284ae6cd43bf96352eaba18d2,
         type: 3}
+      propertyPath: _statMods.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848637413921963971, guid: 29c4dcf284ae6cd43bf96352eaba18d2,
+        type: 3}
       propertyPath: _actions.Array.data[0].UseMode
       value: 2
       objectReference: {fileID: 0}
@@ -606,6 +666,7 @@ MonoBehaviour:
   _crosshairDefinition: {fileID: 0}
   _actions: []
   _icon: {fileID: 0}
+  _statMods: []
   WasPickedUp: 0
 --- !u!65 &954913568
 BoxCollider:

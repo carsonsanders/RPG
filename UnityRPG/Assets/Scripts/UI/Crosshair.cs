@@ -24,7 +24,7 @@ public class Crosshair : MonoBehaviour
         _crosshairImage = GetComponent<Image>();
     }
 
-    private void HandleActiveItemChanged(Item item)
+    private void HandleActiveItemChanged(IItem item)
     {
         if(item != null && item.CrosshairDefinition != null)
         {

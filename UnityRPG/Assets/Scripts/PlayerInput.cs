@@ -22,6 +22,11 @@ public class PlayerInput : MonoBehaviour, IPlayerInput
     public bool GetKeyDown(KeyCode keyCode) => Input.GetKeyDown(keyCode);
 
 
+    private void Update()
+    {
+        Tick();
+    }
+
     public void Tick()
     {
         if (MoveModeTogglePressed != null && Input.GetKeyDown(KeyCode.Minus))
