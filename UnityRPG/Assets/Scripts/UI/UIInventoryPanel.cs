@@ -40,9 +40,12 @@ public class UIInventoryPanel : MonoBehaviour
     {
         if (Selected != null)
         {
-            Swap(slot);
-            Selected.BecomeUnSelected();
-            Selected = null;
+            if(SlotCanHoldItem(slot, Selected.Item))
+            {
+                Swap(slot);
+                Selected.BecomeUnSelected();
+                Selected = null;
+            }
         }
         else if (slot.IsEmpty == false)
         {
@@ -52,6 +55,11 @@ public class UIInventoryPanel : MonoBehaviour
         }
 
         OnSelectionChanged?.Invoke();
+    }
+
+    private bool SlotCanHoldItem(UIInventorySlot slot, IItem selectedItem)
+    {
+        return slot.SlotType == SlotType.General || slot.SlotType == selectedItem.SlotType;
     }
 
     private void Swap(UIInventorySlot slot)

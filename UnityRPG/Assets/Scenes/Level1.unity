@@ -343,6 +343,11 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 5848637413921963971, guid: 29c4dcf284ae6cd43bf96352eaba18d2,
         type: 3}
+      propertyPath: _slotType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848637413921963971, guid: 29c4dcf284ae6cd43bf96352eaba18d2,
+        type: 3}
       propertyPath: _crosshairDefinition
       value: 
       objectReference: {fileID: 11400000, guid: 43e46be8147b0f748a2c19306f3cc669,
@@ -556,6 +561,11 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 5848637413921963971, guid: 29c4dcf284ae6cd43bf96352eaba18d2,
         type: 3}
+      propertyPath: _slotType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848637413921963971, guid: 29c4dcf284ae6cd43bf96352eaba18d2,
+        type: 3}
       propertyPath: _crosshairMode
       value: 1
       objectReference: {fileID: 0}
@@ -682,6 +692,7 @@ MonoBehaviour:
   _actions: []
   _icon: {fileID: 0}
   _statMods: []
+  _slotType: 0
   WasPickedUp: 0
 --- !u!65 &954913568
 BoxCollider:
