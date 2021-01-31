@@ -7,7 +7,7 @@ public class Stats
 
     public Stats()
     {
-        Add(StatType.MoveSpeed, 5);
+        Add(StatType.MoveSpeed, 2);
     }
     public void Add(StatType statType, float value)
     {

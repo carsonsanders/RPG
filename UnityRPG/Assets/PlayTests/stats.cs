@@ -11,9 +11,9 @@ public class stats
     {
         Stats stats = new Stats();
         stats.Add(StatType.MoveSpeed, 5f);
-        Assert.AreEqual(5f, stats.Get(StatType.MoveSpeed));
+        Assert.AreEqual(7f, stats.Get(StatType.MoveSpeed));
         stats.Add(StatType.MoveSpeed, 5f);
-        Assert.AreEqual(10f, stats.Get(StatType.MoveSpeed));
+        Assert.AreEqual(12f, stats.Get(StatType.MoveSpeed));
     }
     
     [Test]
@@ -21,9 +21,9 @@ public class stats
     {
         Stats stats = new Stats();
         stats.Add(StatType.MoveSpeed, 5f);
-        Assert.AreEqual(5f, stats.Get(StatType.MoveSpeed));
+        Assert.AreEqual(7f, stats.Get(StatType.MoveSpeed));
         
         stats.Remove(StatType.MoveSpeed, 5f);
-        Assert.AreEqual(0f, stats.Get(StatType.MoveSpeed));
+        Assert.AreEqual(2f, stats.Get(StatType.MoveSpeed));
     }
 }
