@@ -1929,6 +1929,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: InventoryPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 1986052517052398883, guid: 38b62e049e89a5f44bf10a5ee0cf45ac,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4029754067143938155, guid: 38b62e049e89a5f44bf10a5ee0cf45ac,
         type: 3}
       propertyPath: m_AnchorMax.y
