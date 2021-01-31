@@ -11,9 +11,7 @@ GameObject:
   - component: {fileID: 1986052517052398882}
   - component: {fileID: 1986052517052398894}
   - component: {fileID: 1986052517052398895}
-  - component: {fileID: 1986052517052398880}
   - component: {fileID: 1986052517052398881}
-  - component: {fileID: 1986052516914383993}
   m_Layer: 5
   m_Name: InventoryPanel
   m_TagString: Untagged
@@ -30,7 +28,7 @@ RectTransform:
   m_GameObject: {fileID: 1986052517052398883}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3638135, y: 0.3638135, z: 0.3638135}
+  m_LocalScale: {x: 0.5993099, y: 0.5993099, z: 0.5993099}
   m_Children:
   - {fileID: 4029754067143938155}
   - {fileID: 8595210842614457931}
@@ -102,19 +100,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1986052517052398880
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1986052517052398883}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 656e66008c1d77a48a4b4a177bfecc2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Slots: []
 --- !u!114 &1986052517052398881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,18 +124,6 @@ MonoBehaviour:
   m_Spacing: {x: 10, y: 10}
   m_Constraint: 1
   m_ConstraintCount: 5
---- !u!114 &1986052516914383993
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1986052517052398883}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ef0949707cc9604bb54e6387e60387d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1986052515778025392
 PrefabInstance:
   m_ObjectHideFlags: 0
