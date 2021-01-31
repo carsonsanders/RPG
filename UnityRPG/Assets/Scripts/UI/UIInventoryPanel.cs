@@ -16,6 +16,8 @@ public class UIInventoryPanel : MonoBehaviour
     public int SlotCount => Slots.Length;
     public UIInventorySlot Selected { get; private set; }
 
+    public bool IsSelected => Selected != null;
+
     private void Awake()
     {
         Slots = FindObjectsOfType<UIInventorySlot>()
@@ -39,10 +41,15 @@ public class UIInventoryPanel : MonoBehaviour
         if (Selected != null)
         {
             Swap(slot);
+            Selected.BecomeUnSelected();
             Selected = null;
         }
         else if (slot.IsEmpty == false)
+        {
             Selected = slot;
+            Selected.BecomeSelected();
+
+        }
 
         OnSelectionChanged?.Invoke();
     }

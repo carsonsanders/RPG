@@ -3,18 +3,30 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UIInventorySlot : MonoBehaviour, IPointerDownHandler, IEndDragHandler, IDragHandler
+public class UIInventorySlot : MonoBehaviour, IPointerDownHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public event Action<UIInventorySlot> OnSlotClicked;
     
+    private UIInventoryPanel _inventoryPanel;
+    
     [SerializeField] private Image _image;
+    [SerializeField] private Image _selectedImage;
+    [SerializeField] private Image _focusedImage;
+    
     [SerializeField] private int _sortIndex;
+
 
     public bool IsEmpty => Item == null;
     public Sprite Icon => _image.sprite;
     public IItem Item { get; private set; }
     public bool IconImageEnabled => _image.enabled;
     public int SortIndex => _sortIndex;
+
+
+    private void Awake()
+    {
+        _inventoryPanel = GetComponentInParent<UIInventoryPanel>();
+    }
 
     public void Clear()
     {
@@ -43,4 +55,35 @@ public class UIInventorySlot : MonoBehaviour, IPointerDownHandler, IEndDragHandl
     }
 
     public void OnDrag(PointerEventData eventData) {}
+    public void BecomeSelected()
+    {
+        if (_selectedImage)
+        {
+            _selectedImage.enabled = true;
+        }
+    }
+    
+    public void BecomeUnSelected()
+    {
+        if (_selectedImage)
+            _selectedImage.enabled = false;
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if(_focusedImage && _inventoryPanel.IsSelected)
+            _focusedImage.enabled = true;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if(_focusedImage)
+            _focusedImage.enabled = false;
+    }
+
+    private void OnDisable()
+    {
+        if(_focusedImage)
+            _focusedImage.enabled = false;
+    }
 }
