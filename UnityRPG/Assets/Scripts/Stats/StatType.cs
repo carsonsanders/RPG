@@ -1,4 +1,12 @@
 ﻿public enum StatType
 {
-    MoveSpeed
+    MoveSpeed,
+    INT,
+    REF,
+    TECH,
+    COOL,
+    ATTR, //Attractiveness
+    LUCK,
+    BODY,
+    EMPATHY,
 }

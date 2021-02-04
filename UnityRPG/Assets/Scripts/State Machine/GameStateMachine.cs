@@ -32,13 +32,15 @@ public class GameStateMachine : MonoBehaviour
         _stateMachine.OnStateChanged += state => OnGameStateChanged?.Invoke(state);
 
         var menu = new Menu();
+        var characterCreation = new CharacterCreation();
         var loadLevel = new LoadLevel();
         var play = new Play();
         var pause = new Pause();
 
         _stateMachine.SetState(menu);
         
-        _stateMachine.AddTransition(menu, loadLevel, () => PlayButton.LevelToLoad != null);
+        _stateMachine.AddTransition(menu, characterCreation, () => PlayButton.LevelToLoad != null);
+        _stateMachine.AddTransition(characterCreation, loadLevel, ()=>PlayButton.LevelToLoad != null);
         _stateMachine.AddTransition(loadLevel, play, loadLevel.Finished);
         _stateMachine.AddTransition(play, pause, ()=> PlayerInput.Instance.PausePressed);
         _stateMachine.AddTransition(pause, play, ()=> PlayerInput.Instance.PausePressed);
@@ -61,8 +63,27 @@ public class Menu : IState
     public void OnEnter()
     {
         PlayButton.LevelToLoad = null;
-        SceneManager.LoadSceneAsync("Scenes/Menu"); //Crashes unity for some reason
+        SceneManager.LoadSceneAsync("Scenes/Menu"); 
 
+    }
+
+    public void OnExit()
+    {
+        
+    }
+}
+
+public class CharacterCreation : IState
+{
+    public void Tick()
+    {
+        
+    }
+
+    public void OnEnter()
+    {
+        PlayButton.LevelToLoad = null;
+        SceneManager.LoadSceneAsync("Scenes/CharacterCreation");
     }
 
     public void OnExit()
