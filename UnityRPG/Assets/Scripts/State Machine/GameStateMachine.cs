@@ -9,21 +9,22 @@ public class GameStateMachine : MonoBehaviour
 {
     public static event Action<IState> OnGameStateChanged;
 
-    private static GameStateMachine _instance;
+    public static GameStateMachine Instance;
     private bool _initialized;
     
     private StateMachine _stateMachine;
+    private Dictionary<StatType, float> _playerStats; //to transfer stats from character creation to the player
     public Type CurrentStateType => _stateMachine.CurrentState.GetType();
 
     private void Awake()
     {
-        if (_instance != null)
+        if (Instance != null)
         {
             Destroy(gameObject);
             return;
         }
 
-        _instance = this;
+        Instance = this;
 
         _initialized = true;
         DontDestroyOnLoad(gameObject);
@@ -40,11 +41,21 @@ public class GameStateMachine : MonoBehaviour
         _stateMachine.SetState(menu);
         
         _stateMachine.AddTransition(menu, characterCreation, () => PlayButton.LevelToLoad != null);
-        _stateMachine.AddTransition(characterCreation, loadLevel, ()=>PlayButton.LevelToLoad != null);
+        _stateMachine.AddTransition(characterCreation, loadLevel, ()=>CreateCharacterButton.LevelToLoad != null);
         _stateMachine.AddTransition(loadLevel, play, loadLevel.Finished);
         _stateMachine.AddTransition(play, pause, ()=> PlayerInput.Instance.PausePressed);
         _stateMachine.AddTransition(pause, play, ()=> PlayerInput.Instance.PausePressed);
         _stateMachine.AddTransition(pause, menu, ()=>RestartButton.Pressed);
+    }
+
+    public void loadStats(Dictionary<StatType, float> stats)
+    {
+        _playerStats = stats;
+    }
+
+    public Dictionary<StatType, float> GetStats()
+    {
+        return _playerStats;
     }
 
     private void Update()
@@ -75,6 +86,7 @@ public class Menu : IState
 
 public class CharacterCreation : IState
 {
+    
     public void Tick()
     {
         
@@ -82,13 +94,12 @@ public class CharacterCreation : IState
 
     public void OnEnter()
     {
-        PlayButton.LevelToLoad = null;
+        CreateCharacterButton.LevelToLoad = null;
         SceneManager.LoadSceneAsync("Scenes/CharacterCreation");
     }
 
     public void OnExit()
     {
-        
     }
 }
 
@@ -122,7 +133,7 @@ public class LoadLevel : IState
 
     public void OnEnter()
     {
-        _operations.Add(SceneManager.LoadSceneAsync(PlayButton.LevelToLoad));
+        _operations.Add(SceneManager.LoadSceneAsync(CreateCharacterButton.LevelToLoad));
         _operations.Add(SceneManager.LoadSceneAsync("UI", LoadSceneMode.Additive));
     }
 

@@ -8,20 +8,35 @@ public class StatsManager : MonoBehaviour
     [SerializeField] private TMPro.TextMeshProUGUI _characterPointsText;
     
     private int _characterPoints;
+
+    private StatModifier[] _statModifiers;
     // Start is called before the first frame update
     void Start()
     {
         _characterPoints = 30;
         updateText();
 
-        StatModifier[] statModifiers = GetComponentsInChildren<StatModifier>();
+        _statModifiers = GetComponentsInChildren<StatModifier>();
+        GetComponentInChildren<CreateCharacterButton>().GetButton().onClick.AddListener(()=>exportStats());
 
-        foreach (var statModifier in statModifiers)
+        foreach (var statModifier in _statModifiers)
         {
             statModifier.GetPlusButton().onClick.AddListener(()=>addStat(statModifier));
             statModifier.GetMinusButton().onClick.AddListener(()=>minusStat(statModifier));
         }
+    }
+
+    private void exportStats()
+    {
+        Dictionary<StatType, float> statSheet = new Dictionary<StatType, float>();
+
+        foreach (var statModifier in _statModifiers)
+        {
+            statSheet[statModifier.GetStatType()] = statModifier.GetStat();
+        }
         
+        GameStateMachine.Instance.loadStats(statSheet);
+        Debug.Log("Stats Loaded");
     }
 
     private void addStat(StatModifier sm)

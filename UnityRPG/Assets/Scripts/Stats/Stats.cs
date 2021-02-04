@@ -9,6 +9,7 @@ public class Stats
     {
         Add(StatType.MoveSpeed, 2);
     }
+
     public void Add(StatType statType, float value)
     {
         if (_stats.ContainsKey(statType))

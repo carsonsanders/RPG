@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class StatModifier : MonoBehaviour
 {
+    [SerializeField] private StatType statType;
     private int _statValue;
     private TMPro.TextMeshProUGUI _valueString;
     private Button _plusButton;
@@ -42,6 +43,11 @@ public class StatModifier : MonoBehaviour
     private void updateText()
     {
         _valueString.text = "[ " + _statValue + " ]";
+    }
+    
+    public StatType GetStatType()
+    {
+        return statType;
     }
     
 
