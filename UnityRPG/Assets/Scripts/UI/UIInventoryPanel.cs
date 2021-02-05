@@ -28,6 +28,11 @@ public class UIInventoryPanel : MonoBehaviour
         RegisterSlotsForClickCallback();
     }
 
+    private void Start()
+    {
+        this.gameObject.SetActive(false);
+    }
+
     private void RegisterSlotsForClickCallback()
     {
         foreach (var slot in Slots)
