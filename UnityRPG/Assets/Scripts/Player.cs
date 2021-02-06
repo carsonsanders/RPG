@@ -64,7 +64,7 @@ public class Player : MonoBehaviour
     private void checkForInteractables()
     {
         RaycastHit[] _results = new RaycastHit[100];
-        float _range = 2f;
+        float _range = 1f;
         int _layerMask = LayerMask.GetMask("Default");
         
         Ray ray = Camera.main.ViewportPointToRay(Vector3.one / 2f); //ray in middle of camview
