@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
-public class Item : MonoBehaviour, IItem
+public class Item : MonoBehaviour, IItem, IInteractable
 {
     [SerializeField] private CrosshairDefinition _crosshairDefinition;
     [SerializeField] private UseAction[] _actions = new UseAction[0];
@@ -14,25 +14,17 @@ public class Item : MonoBehaviour, IItem
     public StatMod[] StatMods => _statMods;
     public SlotType SlotType => _slotType;
     public event Action OnPickedUp;
+    public event Action PopUp;
     public UseAction[] Actions => _actions;
     public CrosshairDefinition CrosshairDefinition => _crosshairDefinition;
     public Sprite Icon => _icon;
 
-    public bool WasPickedUp;
-    
-    private void OnTriggerEnter(Collider other)
+    public bool canInteract()
     {
-        if (WasPickedUp)
-            return;
-
-        var inventory = other.GetComponent<Inventory>();
-        if (inventory != null)
-        {
-            inventory.Pickup(this);
-            WasPickedUp = true;
-            OnPickedUp?.Invoke();
-        }
+        return !WasPickedUp;
     }
+
+    public bool WasPickedUp;
 
     private void OnValidate()
     {
@@ -40,6 +32,17 @@ public class Item : MonoBehaviour, IItem
         if(collider.isTrigger == false)
             collider.isTrigger = true;
     }
+
+    public void Interact(Player player)
+    {
+        player.GetInventory().Pickup(this);
+    }
+
+    public string GetActionText()
+    {
+        return "Pickup";
+    }
+
 }
 
 public interface IItem
