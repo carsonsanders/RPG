@@ -1391,6 +1391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MessagePanel: {fileID: 88744959}
+  message: {fileID: 1629049537}
 --- !u!114 &1078407445
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InteractablePopup : MonoBehaviour
 {
     [SerializeField] public GameObject MessagePanel;
+
+    [SerializeField] private Text message;
     // Start is called before the first frame update
     IEnumerator Start()
     {
@@ -19,6 +22,7 @@ public class InteractablePopup : MonoBehaviour
 
     public void OpenMessagePanel(string text)
     {
+        message.text = "Press F to " + text;
         MessagePanel.SetActive(true);
     }
 
